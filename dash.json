@@ -32,6 +32,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 0,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -42,22 +43,22 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "none"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 6,
         "w": 2,
         "x": 0,
         "y": 0
       },
-      "id": 14,
+      "id": 22,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -65,11 +66,13 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
+          "alias": "Power (W)",
           "datasource": {
             "type": "influxdb",
             "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
@@ -89,7 +92,7 @@
             }
           ],
           "orderByTime": "ASC",
-          "query": "SELECT last(\"p_pv_1\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "query": "SELECT last(\"p_pv_1\") FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -108,9 +111,53 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "alias": "Voltage (V)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "inputs",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT last(\"v_pv_1\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "rawQuery": false,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "v_pv_1"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
-      "title": "Power pv1",
+      "title": "PV1 (West)",
       "type": "stat"
     },
     {
@@ -133,22 +180,22 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "none"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 6,
         "w": 2,
         "x": 2,
         "y": 0
       },
-      "id": 15,
+      "id": 23,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -156,11 +203,13 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
+          "alias": "Power (W)",
           "datasource": {
             "type": "influxdb",
             "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
@@ -180,7 +229,7 @@
             }
           ],
           "orderByTime": "ASC",
-          "query": "SELECT last(\"p_pv_2\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "query": "SELECT last(\"p_pv_2\") FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -199,9 +248,53 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "alias": "Voltage (V)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "inputs",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT last(\"v_pv_2\") FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "v_pv_1"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
-      "title": "Power pv2",
+      "title": "PV2 (East)",
       "type": "stat"
     },
     {
@@ -248,9 +341,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -326,7 +420,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 8,
+        "x": 6,
         "y": 0
       },
       "id": 8,
@@ -342,9 +436,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -407,6 +502,18 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "blue",
+                "value": -5000
+              },
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 1
               }
             ]
           },
@@ -417,7 +524,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 10,
+        "x": 8,
         "y": 0
       },
       "id": 11,
@@ -433,9 +540,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -478,7 +586,7 @@
           "tags": []
         }
       ],
-      "title": "Grid cons",
+      "title": "Grid consumption",
       "type": "stat"
     },
     {
@@ -498,10 +606,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -510,17 +614,17 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 6,
         "w": 2,
-        "x": 12,
+        "x": 10,
         "y": 0
       },
-      "id": 6,
+      "id": 25,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -528,11 +632,13 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
+          "alias": "Today",
           "datasource": {
             "type": "influxdb",
             "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
@@ -571,9 +677,21 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "alias": "All time",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
+          },
+          "hide": false,
+          "query": "SELECT last(\"e_to_grid_all\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series"
         }
       ],
-      "title": "Export today",
+      "title": "Export to grid",
       "type": "stat"
     },
     {
@@ -581,70 +699,90 @@
         "type": "influxdb",
         "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 0,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
           "mappings": [],
-          "max": 100,
-          "min": 0,
-          "noValue": "?",
           "thresholds": {
-            "mode": "percentage",
+            "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
               },
               {
-                "color": "dark-red",
+                "color": "red",
+                "value": -5000
+              },
+              {
+                "color": "semi-dark-blue",
                 "value": 0
-              },
-              {
-                "color": "dark-orange",
-                "value": 10
-              },
-              {
-                "color": "#EAB839",
-                "value": 20
-              },
-              {
-                "color": "green",
-                "value": 40
               }
             ]
           },
-          "unit": "%"
+          "unit": "watt"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 6,
         "w": 8,
-        "x": 16,
+        "x": 12,
         "y": 0
       },
-      "id": 20,
+      "id": 27,
       "options": {
-        "displayMode": "lcd",
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
-        "showUnfilled": true,
-        "valueMode": "color"
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
       },
-      "pluginVersion": "9.5.2",
       "targets": [
         {
+          "alias": "charge",
           "datasource": {
             "type": "influxdb",
             "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
@@ -663,16 +801,19 @@
               "type": "fill"
             }
           ],
+          "hide": false,
+          "measurement": "inputs",
           "orderByTime": "ASC",
-          "query": "SELECT last(\"soc\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "policy": "autogen",
+          "query": "SELECT mean(\"p_charge\") - mean(\"p_discharge\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
-          "refId": "A",
+          "refId": "E",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "e_chg_day"
+                  "bat_count"
                 ],
                 "type": "field"
               },
@@ -685,8 +826,8 @@
           "tags": []
         }
       ],
-      "title": "Battery capacity",
-      "type": "bargauge"
+      "title": "Battery charge",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -698,99 +839,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "decimals": 1,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-               "value": null
-              }
-            ]
-          },
-          "unit": "volt"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 0,
-        "y": 3
-      },
-      "id": 16,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "orderByTime": "ASC",
-          "query": "SELECT last(\"v_pv_1\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "e_chg_day"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Volts pv1",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -801,17 +849,17 @@
               }
             ]
           },
-          "unit": "volt"
+          "unit": "kwatth"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 3,
-        "w": 2,
-        "x": 2,
-        "y": 3
+        "w": 4,
+        "x": 20,
+        "y": 0
       },
-      "id": 17,
+      "id": 19,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -824,11 +872,13 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
+          "alias": "Today",
           "datasource": {
             "type": "influxdb",
             "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
@@ -848,7 +898,7 @@
             }
           ],
           "orderByTime": "ASC",
-          "query": "SELECT last(\"v_pv_2\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "query": "SELECT last(\"e_chg_day\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -867,9 +917,20 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "alias": "All time",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
+          },
+          "hide": false,
+          "query": "SELECT last(\"e_chg_all\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series"
         }
       ],
-      "title": "Volts pv2",
       "type": "stat"
     },
     {
@@ -883,6 +944,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 3,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -890,29 +952,25 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
-          "unit": "kwatth"
+          "unit": "watth"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 6,
         "w": 2,
         "x": 4,
         "y": 3
       },
-      "id": 2,
+      "id": 24,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -920,54 +978,36 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
+          "alias": "Today",
           "datasource": {
             "type": "influxdb",
             "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
           },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "inputs",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "query": "SELECT last(\"e_pv_day_1\") + last(\"e_pv_day_2\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "hide": false,
+          "query": "SELECT (last(\"e_pv_day_1\") + last(\"e_pv_day_2\")) *1000  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "e_pv_day_1"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
+          "refId": "B",
+          "resultFormat": "time_series"
+        },
+        {
+          "alias": "All time",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
+          },
+          "hide": false,
+          "query": "SELECT last(\"e_pv_all\") * 1000 FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "C",
+          "resultFormat": "time_series"
         }
       ],
-      "title": "Yield Today",
       "transformations": [],
       "type": "stat"
     },
@@ -981,6 +1021,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 3,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -996,17 +1037,17 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 6,
         "w": 2,
-        "x": 8,
+        "x": 6,
         "y": 3
       },
-      "id": 9,
+      "id": 26,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -1014,11 +1055,13 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
+          "alias": "Today",
           "datasource": {
             "type": "influxdb",
             "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
@@ -1057,9 +1100,20 @@
             ]
           ],
           "tags": []
+        },
+        {
+          "alias": "All time",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
+          },
+          "hide": false,
+          "query": "select last(\"e_inv_all\") - last(\"e_rec_all\") + last(\"e_to_user_all\") - last(\"e_to_grid_all\") from \"autogen\".\"inputs\"  WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series"
         }
       ],
-      "title": "Today Cons.",
       "type": "stat"
     },
     {
@@ -1090,7 +1144,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 10,
+        "x": 8,
         "y": 3
       },
       "id": 12,
@@ -1106,9 +1160,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -1151,7 +1206,7 @@
           "tags": []
         }
       ],
-      "title": "Grid volts",
+      "title": "Grid voltage",
       "type": "stat"
     },
     {
@@ -1159,97 +1214,7 @@
         "type": "influxdb",
         "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
       },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "kwatth"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 12,
-        "y": 3
-      },
-      "id": 7,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "orderByTime": "ASC",
-          "query": "SELECT last(\"e_to_grid_all\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "e_chg_day"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Export total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1264,99 +1229,16 @@
                 "value": null
               },
               {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "volt"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 16,
-        "y": 3
-      },
-      "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "orderByTime": "ASC",
-          "query": "SELECT last(\"v_bat\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "e_chg_day"
-                ],
-                "type": "field"
+                "color": "dark-red",
+                "value": -5000
               },
               {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Bat. volt",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
                 "color": "green",
-                "value": null
+                "value": 0
+              },
+              {
+                "color": "semi-dark-blue",
+                "value": 1
               }
             ]
           },
@@ -1367,7 +1249,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 18,
+        "x": 20,
         "y": 3
       },
       "id": 21,
@@ -1383,9 +1265,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -1428,7 +1311,7 @@
           "tags": []
         }
       ],
-      "title": "Bat. charge",
+      "title": "Charging Power",
       "type": "stat"
     },
     {
@@ -1448,101 +1331,14 @@
               {
                 "color": "green",
                 "value": null
-              }
-            ]
-          },
-          "unit": "kwatth"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 20,
-        "y": 3
-      },
-      "id": 19,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "orderByTime": "ASC",
-          "query": "SELECT last(\"e_chg_day\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "e_chg_day"
-                ],
-                "type": "field"
               },
               {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Charged today",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "unit": "kwatth"
+          "unit": "volt"
         },
         "overrides": []
       },
@@ -1552,7 +1348,7 @@
         "x": 22,
         "y": 3
       },
-      "id": 5,
+      "id": 4,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -1565,9 +1361,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -1589,7 +1386,7 @@
             }
           ],
           "orderByTime": "ASC",
-          "query": "SELECT last(\"e_chg_all\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "query": "SELECT last(\"v_bat\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1610,234 +1407,7 @@
           "tags": []
         }
       ],
-      "title": "Charged total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 3,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "kwatth"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 4,
-        "y": 6
-      },
-      "id": 3,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "inputs",
-          "orderByTime": "ASC",
-          "policy": "autogen",
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "e_pv_all"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "inputs",
-          "orderByTime": "ASC",
-          "policy": "augen",
-          "query": "SELECT mean(\"value\") FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": true,
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Yield Total",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 3,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "kwatth"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2,
-        "x": 8,
-        "y": 6
-      },
-      "id": 10,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "orderByTime": "ASC",
-          "query": "select last(\"e_inv_all\") - last(\"e_rec_all\") + last(\"e_to_user_all\") - last(\"e_to_grid_all\") from \"autogen\".\"inputs\"  WHERE $timeFilter GROUP BY time($__interval) fill(null)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "e_chg_day"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "Total Cons.",
+      "title": "Voltage",
       "type": "stat"
     },
     {
@@ -1867,7 +1437,7 @@
       "gridPos": {
         "h": 3,
         "w": 2,
-        "x": 10,
+        "x": 8,
         "y": 6
       },
       "id": 13,
@@ -1883,9 +1453,10 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.5.2",
+      "pluginVersion": "10.2.3",
       "targets": [
         {
           "datasource": {
@@ -1936,12 +1507,127 @@
         "type": "influxdb",
         "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
       },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "noValue": "?",
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 0
+              },
+              {
+                "color": "dark-orange",
+                "value": 10
+              },
+              {
+                "color": "#EAB839",
+                "value": 20
+              },
+              {
+                "color": "green",
+                "value": 40
+              }
+            ]
+          },
+          "unit": "%"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 12,
+        "y": 6
+      },
+      "id": 20,
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "query": "SELECT last(\"soc\")  FROM \"autogen\".\"inputs\" WHERE $timeFilter GROUP BY time($__interval) fill(null)\n",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "e_chg_day"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d511ee4c-99ac-4713-bd4f-514989a02631"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -1955,6 +1641,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -1964,7 +1651,7 @@
             "scaleDistribution": {
               "type": "linear"
             },
-            "showPoints": "auto",
+            "showPoints": "always",
             "spanNulls": true,
             "stacking": {
               "group": "A",
@@ -1975,6 +1662,7 @@
             }
           },
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -2000,7 +1688,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "super-light-yellow",
+                  "fixedColor": "text",
                   "mode": "fixed"
                 }
               }
@@ -2030,7 +1718,7 @@
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "yellow",
+                  "fixedColor": "super-light-yellow",
                   "mode": "fixed"
                 }
               }
@@ -2233,7 +1921,7 @@
               {
                 "params": [
                   "p_to_grid"
-               ],
+                ],
                 "type": "field"
               },
               {
@@ -2294,8 +1982,7 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
@@ -2308,6 +1995,6 @@
   "timezone": "",
   "title": "solar",
   "uid": "b3f0ba47-d05b-4cf7-8f2e-ac91e27cdd85",
-  "version": 29,
+  "version": 63,
   "weekStart": ""
 }
